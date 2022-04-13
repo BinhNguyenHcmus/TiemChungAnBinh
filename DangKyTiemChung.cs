@@ -16,5 +16,11 @@ namespace TiemChungAnBinh
         {
             InitializeComponent();
         }
+
+        private void DangKyTiemChung_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
