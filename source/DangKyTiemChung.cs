@@ -37,13 +37,17 @@ namespace TiemChungAnBinh
                 this.Close();
             }
         }
-    
-        public class Buylist{
-            string Maso;
-            string Ten;
-            int Money;
+
+        private void buylistBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
         }
-    
     }
 
+    public class Buylist
+    {
+        public string Masp { get; set; }
+        public string Tengoi { get; set; }
+        public string Money { get; set; }
+    }
 }

@@ -103,6 +103,7 @@
     <EmbeddedResource Include="ThanhToan.resx">
       <DependentUpon>ThanhToan.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\DataSources\Buylist.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
