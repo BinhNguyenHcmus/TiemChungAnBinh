@@ -1,0 +1,68 @@
+create or replace procedure getLast_Phieu (numb int)
+language 'plpgsql'
+as $$
+BEGIN
+select count(maphieu) into numb
+from "Phieu";
+end;
+$$;
+
+create or replace procedure createPhieu (maph_in char(5), makh_in char(5), madd_in char(5), loai_in char(10))
+language 'plpgsql'
+as $$
+begin
+	INSERT INTO "Phieu" (maphieu, makh, diadiemtiem, thoigiantiem, loaiphieu) VALUES (maph_in, makh_in, madd_in, CURRENT_DATE, loai_in);
+	commit;
+end;
+$$;
+
+create or replace procedure createHoadon (mahd_in char(5), maph_in char(5), hinhthuc_in char(10), money_in int, loai_in char(10), ptt_in char(10))
+language 'plpgsql'
+as $$
+begin
+	INSERT INTO "Hoadon" (mahd, maphieu, hinhthuc, ngaythanhtoan, tongsotien, loaithanhtoan, phuongthuc)
+	VALUES (mahd_in, maph_in, hinhthuc_in, CURRENT_DATE, money_in, loai_in, ptt_in);
+	commit;
+end;
+$$;
+
+create or replace procedure insertChitiet (maph_in char(5), mag_in char(5), sl_in int, kieumua_in char(5))
+language 'plpgsql'
+as $$
+begin
+	INSERT INTO "Chitietphieu" (maphieu, magoi, soluong, kieumua)
+	VALUES (maph_in, mag_in, sl_in, kieumua_in);
+	commit;
+end;
+$$;
+
+create or replace procedure ktSL (mag_in char(5))
+language 'plpgsql'
+as $$
+begin
+	select magoi
+	from "Goivacxin"
+	where exists (select *
+				 from "Chitietgoi", "Vacxin"
+				 where "Chitietgoi".magoi = mag_in and "Chitietgoi".mavacxin = "Vacxin".mavacxin and "Vacxin".soluongton <= 0);
+end;
+$$;
+
+CREATE OR REPLACE FUNCTION soluongton()
+   RETURNS TRIGGER
+   LANGUAGE PLPGSQL
+AS $$
+BEGIN
+   UPDATE "Vacxin"
+   SET luongton = luongton - NEW.soluong
+   WHERE mavacxin = (SELECT "Vacxin".mavacxin from "Chitietgoi", "Vacxin"
+				     where "Chitietgoi".magoi = "mag_in" and "Chitietgoi".mavacxin = "Vacxin".mavacxin);
+   -- trigger logic
+END;
+$$;
+
+CREATE TRIGGER TINHSL
+AFTER INSERT ON "Chitietphieu"
+FOR EACH ROW
+EXECUTE PROCEDURE soluongton();
+
