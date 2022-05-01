@@ -1,5 +1,5 @@
-select * from "Khachhang";
-select * from "Giamho";
+select * from "Phieu";
+select * from "Vacxin";
 select * from "Trungtam";
 select * from "Nhanvien";
 

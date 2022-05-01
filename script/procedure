@@ -2,8 +2,8 @@ create or replace procedure getLast_Phieu (numb int)
 language 'plpgsql'
 as $$
 BEGIN
-select count(maphieu) into numb
-from "Phieu";
+	select count(maphieu) into numb
+	from "Phieu";
 end;
 $$;
 
@@ -52,11 +52,16 @@ CREATE OR REPLACE FUNCTION soluongton()
    RETURNS TRIGGER
    LANGUAGE PLPGSQL
 AS $$
+Declare
+c1 cursor for SELECT "Vacxin".mavacxin from "Chitietgoi", "Vacxin"
+			  where "Chitietgoi".magoi = NEW.magoi and "Chitietgoi".mavacxin = "Vacxin".mavacxin;
 BEGIN
-   UPDATE "Vacxin"
-   SET luongton = luongton - NEW.soluong
-   WHERE mavacxin = (SELECT "Vacxin".mavacxin from "Chitietgoi", "Vacxin"
-				     where "Chitietgoi".magoi = "mag_in" and "Chitietgoi".mavacxin = "Vacxin".mavacxin);
+   for c_rec in c1 loop
+	   UPDATE "Vacxin"
+	   SET luongton = luongton - NEW.soluong
+	   WHERE mavacxin = c_rec.mavacxin;
+   end loop;
+   return new;
    -- trigger logic
 END;
 $$;
