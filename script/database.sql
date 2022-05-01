@@ -24,8 +24,9 @@ DROP TABLE "Quanly";
 DROP TABLE "Vacxin";
 DROP TABLE "Lichlamviec";
 DROP TABLE "Nhanvien";
-
+DROP TABLE "Trungtam";
 	
+
 CREATE TABLE "Khachhang" (
     "makh" CHAR(5) NOT NULL,
     "hoten" TEXT NOT NULL,
@@ -52,12 +53,13 @@ CREATE TABLE "Lichlamviec" (
 
 CREATE TABLE "Hoadon" (
     "mahd" CHAR(5) NOT NULL,
+	"maphieu" CHAR(5) NOT NULL,
     "hinhthuc" CHAR(10) NOT NULL,
 	"ngaythanhtoan" DATE NOT NULL,
 	"tongsotien" INTEGER NOT NULL,
 	"sotiendatra" INTEGER NOT NULL,
 	"loaithanhtoan" CHAR(10) NOT NULL,
-	"phuongthucthanhtoan" CHAR(10) NOT NULL,
+	"phuongthuc" CHAR(10) NOT NULL,
     CONSTRAINT "Bill_pkey" PRIMARY KEY ("mahd")
 );
 
@@ -104,7 +106,6 @@ CREATE TABLE "Goivacxin" (
 CREATE TABLE "Chitietgoi" (
     "magoi" CHAR(5) NOT NULL,
     "mavacxin" CHAR(5) NOT NULL,
-	"loaigoi" CHAR(10) NOT NULL,
     CONSTRAINT "PackageDetail_pkey" PRIMARY KEY ("magoi", "mavacxin")
 );
 
@@ -129,7 +130,7 @@ CREATE TABLE "Phieunhaphang" (
 	"mancc" CHAR(5) NOT NULL,
 	"maql" CHAR(5) NOT NULL,
 	"soluong" INTEGER NOT NULL,
-    CONSTRAINT "Import_pkey" PRIMARY KEY ("maphieu")
+    CONSTRAINT "Import_pkey" PRIMARY KEY ("maphieu", "mavacxin")
 );
 
 CREATE TABLE "Vacxin" (
@@ -154,5 +155,6 @@ ALTER TABLE "Chitietgoi" ADD CONSTRAINT "Chitietgoi_magoi_fkey" FOREIGN KEY ("ma
 ALTER TABLE "Chitietphieu" ADD CONSTRAINT "Chitietphieu_magoi_fkey" FOREIGN KEY ("magoi") REFERENCES "Goivacxin"("magoi") ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE "Chitietphieu" ADD CONSTRAINT "Chitietphieu_maphieu_fkey" FOREIGN KEY ("maphieu") REFERENCES "Phieu"("maphieu") ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE "Nhanvien" ADD CONSTRAINT "Nhanvien_matt_fkey" FOREIGN KEY ("matt") REFERENCES "Trungtam"("matt") ON DELETE SET NULL ON UPDATE CASCADE;
+
 
 
