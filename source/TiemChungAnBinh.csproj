@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DangKyDatMua.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DangKyDatMua.Designer.cs">
+      <DependentUpon>DangKyDatMua.cs</DependentUpon>
+    </Compile>
     <Compile Include="DangKyThongTin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThanhToan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThanhToan.Designer.cs">
+      <DependentUpon>ThanhToan.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="DangKyDatMua.resx">
+      <DependentUpon>DangKyDatMua.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DangKyThongTin.resx">
       <DependentUpon>DangKyThongTin.cs</DependentUpon>
     </EmbeddedResource>
@@ -83,7 +98,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ThanhToan.resx">
+      <DependentUpon>ThanhToan.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -96,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="thumbnail.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
