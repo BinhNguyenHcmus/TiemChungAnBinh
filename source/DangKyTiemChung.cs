@@ -37,5 +37,13 @@ namespace TiemChungAnBinh
                 this.Close();
             }
         }
+    
+        public class Buylist{
+            string Maso;
+            string Ten;
+            int Money;
+        }
+    
     }
+
 }
