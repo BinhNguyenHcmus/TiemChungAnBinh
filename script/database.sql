@@ -11,7 +11,20 @@ CREATE DATABASE anbinh
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 	
--- DROP TABLE "Giamho"	
+DROP TABLE "Chitietphieu";
+DROP TABLE "Giamho";
+DROP TABLE "Phieu";
+DROP TABLE "Hoadon";
+DROP TABLE "Khachhang";
+DROP TABLE "Chitietgoi";
+DROP TABLE "Goivacxin";
+DROP TABLE "Phieunhaphang";
+DROP TABLE "Nhacungcap";
+DROP TABLE "Quanly";
+DROP TABLE "Vacxin";
+DROP TABLE "Lichlamviec";
+DROP TABLE "Nhanvien";
+
 	
 CREATE TABLE "Khachhang" (
     "makh" CHAR(5) NOT NULL,
@@ -19,7 +32,8 @@ CREATE TABLE "Khachhang" (
 	"diachi" TEXT NOT NULL,
 	"sodienthoai" CHAR(10) NOT NULL,
 	"ngaytao" DATE NOT NULL,
-	"gioitinh" BOOLEAN NOT NULL,
+	"ngaysinh" DATE NOT NULL,
+	"gioitinh" CHAR(3) NOT NULL,
     CONSTRAINT "User_pkey" PRIMARY KEY ("makh")
 );
 
@@ -130,6 +144,7 @@ CREATE TABLE "Vacxin" (
 ALTER TABLE "Giamho" ADD CONSTRAINT "Giamho_makh_fkey" FOREIGN KEY ("makh") REFERENCES "Khachhang"("makh") ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE "Phieu" ADD CONSTRAINT "Phieu_makh_fkey" FOREIGN KEY ("makh") REFERENCES "Khachhang"("makh") ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE "Phieu" ADD CONSTRAINT "Phieu_diadiemtiem_fkey" FOREIGN KEY ("diadiemtiem") REFERENCES "Trungtam"("matt") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Hoadon" ADD CONSTRAINT "Hoadon_maphieu_fkey" FOREIGN KEY ("maphieu") REFERENCES "Phieu"("maphieu") ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE "Lichlamviec" ADD CONSTRAINT "Lichlamviec_manv_fkey" FOREIGN KEY ("manv") REFERENCES "Nhanvien"("manv") ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE "Phieunhaphang" ADD CONSTRAINT "Phieunhaphang_maql_fkey" FOREIGN KEY ("maql") REFERENCES "Quanly"("maql") ON DELETE SET NULL ON UPDATE CASCADE;
 ALTER TABLE "Phieunhaphang" ADD CONSTRAINT "Phieunhaphang_mavacxin_fkey" FOREIGN KEY ("mavacxin") REFERENCES "Vacxin"("mavacxin") ON DELETE SET NULL ON UPDATE CASCADE;
